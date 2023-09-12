@@ -1,0 +1,407 @@
+import React, { useState, useEffect, useRef } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { ProjectHeader } from './ProjectHeader';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+import swal from 'sweetalert'
+import { axiosInstance } from "../../../config"
+// import DataTable from 'react-data-table-component';
+// import Checkbox from '@mui/icons-material/CheckBox';
+// import ArrowDownward from '@mui/icons-material/ArrowDownward';
+
+
+export const TryNewEstimate = () => {
+
+  const params = useParams();
+  const projectId = params.projectId;
+  const [estimateInfo, setEstimateInfo] = useState([])
+  const [managerInfo, setManagerInfo] = useState([])
+  const [servicesInfo, setServicesInfo] = useState([])
+  const [servicesList, setServicesList] = useState([])
+  const [data, setData] = useState([])
+  console.log(estimateInfo);
+  console.log(managerInfo);
+  console.log(servicesInfo);
+
+  useEffect(() => {
+    getdata();
+    getServices();
+  }, [])
+
+  const getdata = async () => {
+    const { data } = await axiosInstance.get(`projectestimate/copy/${projectId}`)
+    setEstimateInfo(data[0].estimate_info)
+    setServicesInfo(data[1].services)
+    setManagerInfo(data[2].users)
+    console.log(data);
+    console.log("res.data")
+  }
+
+  const getServices = async () => {
+    const { data } = await axiosInstance.get(`services/view`)
+    setServicesList(data)
+    console.log(data);
+    console.log("res.data")
+  }
+
+  let subtotal = 0;
+
+  {
+    servicesInfo && servicesInfo.map((service, index) => {
+
+      subtotal += Number(service.no_of_day) * Number(service.nos) * Number(service.service_rate);
+
+      return subtotal;
+    }
+
+    )
+  }
+
+  const addMoreRow = () => {
+  setServicesInfo([...servicesInfo, {height:'', length:'', no_of_day:'', nos:'', s_id:'', service_description: "",service_id: 0, service_rate:'',width:''}]);
+  console.log(servicesInfo);
+  // window.location.href = '#estimate';
+  let element = document.getElementById("estimate");
+  element.scrollIntoView({behavior:"smooth"});
+
+//  document.querySelector("#addServices tbody").innerHTML += rowHtml;
+
+  }
+
+  const removeRow = (e) => {
+    let allrows = document.querySelectorAll('#addServices tbody tr');
+    if(allrows.length >1){
+      document.getElementById(e).remove();
+    }
+  
+  }
+  let currentDate = new Date()
+  let day = currentDate.getDate()
+  let month = currentDate.getMonth() + 1
+  let year = currentDate.getFullYear()
+  let monthArray = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
+  // let today = day + "/" + month + "/" + year;
+
+  const handle = (e) => {
+    const newdata = { ...data }
+    newdata[e.target.name] = e.target.value;
+    setData(newdata)
+    console.log(newdata);
+}
+
+
+
+  return (
+    <>
+
+      <ProjectHeader />
+
+
+
+      <div className="row">
+
+        {/* <h4 className='ps-0 pe-0 text-center mb-4'>How would you like to go ahead?<br /><b className='text-success mt-4'>Choose an Option</b></h4> */}
+        {/* <hr /> */}
+
+        <div className='text-center'>
+          <div className="container-fluid">
+
+           <div className="bg-blue row p-2 align-items-center">
+            <div className="col-md-7 text-start">
+            <h2 className="page-heading text-start text-white">
+              Create Estimator</h2>
+            </div>
+            <div className="col-md-5 text-end">
+            <input type="text" id="service_description" placeholder='To copy data from other estimate, search here...' className="form-control service_desc" />
+            </div>
+           </div>
+
+            <div className="row search-estimate-row">
+              <div className="col-sm-6  col-xs-12  col-md-6">
+
+              </div>
+            </div>
+
+            <div className="row bg-white py-2 shadow border-light" id="estimatorCreatePage">
+              <div className="col-sm-12  col-xs-12  col-md-12">
+
+                <div className="the-box">
+                  <table className="table table-striped table-hover table-bordered">
+                    <tbody>
+
+                      {estimateInfo && estimateInfo.map(value => (
+                        <>
+                          <tr style={{ verticalAlign: "middle" }}>
+                            <td ><b>Estimate No.</b></td>
+                            <td className='text-start'>{value.estimate_no}</td>
+                            <td colspan="2" className='text-end'>{day +' '+ monthArray[month-1] +' '+ year}</td>
+
+
+                          </tr>
+
+
+                          <tr style={{ verticalAlign: "middle" }}>
+                            <td ><b>Project Code.</b></td>
+                            <td className='text-start'>{value.project_code}</td>
+                            <td ><b>Project</b></td>
+                            <td className='text-start'>{value.project_title}</td>
+                          </tr>
+                        </>
+                      ))}
+
+                      <tr style={{ verticalAlign: "middle" }}>
+                        <td ><b>Client</b></td>
+                        <td className='text-start'>{estimateInfo[0]?.customer_name}</td>
+                        <td ><b>Project Manager</b></td>
+                        <td>
+
+
+
+                          <select className="form-control" id='user_id'>
+                            <option value="">Select Project Manager</option>
+                            {managerInfo && managerInfo.map(user => (
+                              <>
+                                <option value={user?.user_id}>{user?.name}</option>
+                              </>
+                            ))}
+                          </select>
+                        </td>
+                      </tr>
+
+
+
+
+
+
+                    </tbody>
+
+                  </table>
+
+
+                  <form className='mt-4'>
+
+                    <hr style={{ opacity: "0.6", height: "4px", backgroundColor: "#000" }} />
+                    <div className="row">
+                      <div className="text-start col-md-8">
+                        <h4 className="text-start">Add Services :</h4>
+
+                      </div>
+                      <div className="text-end col-md-4">
+                        <button type="button" className="btn btn-primary btn-sm" onClick={addMoreRow}><i className="fa fa-plus-square me-2" style={{ fontSize: "1.2rem" }}></i><b>Add Service</b></button>
+                      </div>
+
+                    </div>
+                    <div className="row p-2 border-dark">
+                      <table className="table table-bordered" id="addServices">
+                        <thead>
+                          <tr>
+                            <th>Service</th>
+                            <th>Service Type</th>
+                            <th>Description</th>
+                            <th>Nos.</th>
+                            <th>L</th>
+                            <th>W</th>
+                            <th>H</th>
+                            <th>No of Days</th>
+                            <th>Price</th>
+                            <th>Total Price</th>
+                            {/* <th><b>Add </b></th> */}
+                            <th><b>Delete</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          {servicesInfo && servicesInfo.map((service, index) => (
+                            <>
+                              <tr className="estimator-row" id={`serviceRow${index}`}>
+                                <td>
+                                  <select className="form-control service_id watch-for-change" required="required" onchange={(e) => handle(e)}  name="service_id" value={service?.service_id}>
+                                    <option value='0' disabled>Select Service</option>
+                                    {servicesList && servicesList.map(val => (
+
+                                      <>
+                                        <option className='text-dark' value={val?.id}>{val?.name}</option>
+                                      </>
+                                    ))}
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" value="Per Item" onchange={(e) => handle(e)}  name="service_type" className="form-control service_type"  required />
+                                </td>
+                                <td>
+                                  <input type="text" value={service?.service_description} id="service_description" className="form-control service_desc" />
+                                </td>
+                                <td>
+                                  <input type="text" value={service?.nos} onchange={(e) => handle(e)}  name="nos" className="form-control no_of_unit watch-for-change" required="required" />
+
+                                </td>
+                                <td>
+                                  <input type="number" value={service?.length} id="length" className="form-control length watch-for-change" required="required" />
+
+                                </td>
+                                <td>
+                                  <input type="number" value={service?.width} id="width" className="form-control width watch-for-change" required="required" />
+
+                                </td>
+                                <td>
+                                  <input type="number" value={service?.height} id="height" className="form-control height watch-for-change" required="required" />
+
+                                </td>
+                                <td>
+                                  <input type="text" value={service?.no_of_day} id="no_of_day" className="form-control no_of_day watch-for-change" required="required" onblur="getTotalPrice(this.id)" />
+
+                                </td>
+                                <td>
+                                  <input type="text" value={service?.service_rate} id="service_rate" className="form-control price watch-for-change" required="required" />
+
+                                </td>
+                                <td>
+                                  <input type="text" name="total_price" value={(service?.no_of_day * service?.service_rate * service?.nos).toLocaleString()} id="total-1" className="form-control total_price text-end" readonly="readonly" required="required" />
+
+                                </td>
+                                {/* <td>
+                                  <button type="button" className="btn btn-primary btn-sm addJS" onClick={() => createNewRow}><i className="fa fa-plus-square" style={{ fontSize: "1.2rem" }} aria-hidden="true"></i></button>
+                                </td> */}
+                                <td>
+                                  <button type="button" className="btn btn-danger btn-sm remJS" onClick={(e) => removeRow(`serviceRow${index}`)}><i className="fa fa-trash" style={{ fontSize: "1.2rem" }} aria-hidden="true"></i></button>
+                                </td>
+                              </tr>
+                            </>
+                          ))}
+
+
+                        </tbody>
+                      </table>
+                      {/* <div></div> */}
+
+
+                    </div>
+                    <hr style={{ opacity: "0.6", height: "4px", backgroundColor: "#000" }} className="mb-4" />
+
+
+
+
+                    <div className="row" id="estimate">
+                      <div className="col-md-8">
+                        {/* <label>keypoints</label> */}
+                        <div className="editor">
+
+
+                          <CKEditor
+                            editor={ClassicEditor}
+                            data={estimateInfo[0]?.terms}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              // setKeypoints(data)
+                              // setText(data)
+                            }}
+
+                          />
+                        </div>
+                        {/* <input className="form-control" type="text" value={keypoints} onChange={e => setKeypoints(e.target.value)} placeholder="Keypoints" /> */}
+                      </div>
+                      <div className="col-md-4 ">
+                        <table class="table table-bordered border-primary">
+
+                          <tbody>
+                            <tr>
+
+                              <td colSpan="2"><b>Subtotal</b></td>
+                              <td>
+                                {subtotal.toLocaleString()}
+                              </td>
+
+                            </tr>
+                            <tr style={{verticalAlign:"middle"}}>
+                              <td colSpan="2">
+                                <b>Discount</b>
+                              </td>
+                              <td>
+                              <input type="text" name="total_price" value={estimateInfo[0]?.discount} id="discount" className="form-control total_price text-end" required="required" />
+                              </td>
+                            </tr>
+
+                            <tr style={{verticalAlign:"middle"}}>
+                              <td colSpan="2">
+                                <b>Agency Fees</b>
+                              </td>
+                              <td><input type="text" name="total_price" value={estimateInfo[0]?.agency_fees} id="discount" className="form-control total_price text-end" required="required" /></td>
+                            </tr>
+
+                            <tr>
+                              <td colSpan="2">
+                                <b>Total</b>
+                              </td>
+                              <td>{(subtotal + Number(estimateInfo[0]?.agency_fees) - Number(estimateInfo[0]?.discount)).toLocaleString()}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+
+                                <b>Tax Type</b>
+                              </td>
+                              <td>
+                                <b>Percent Tax</b>
+                              </td>
+                              <td>Tax Amount</td>
+                            </tr>
+                            <tr style={{verticalAlign:"middle"}}>
+                              <td>
+                              <select className="form-control" name="project_manager_id" value={estimateInfo[0]?.tax_type}>
+                            <option value="" disabled>Select Tax Type</option>
+                            
+                                <option value="cgst_sgst">CGST & SGST</option>
+                                <option value="igst">IGST</option>
+                             
+                          </select>
+                             
+                              </td>
+                              <td>
+                              <input type="text" name="total_price" value={estimateInfo[0]?.tax_percent} id="discount" className="form-control total_price text-end" required="required" />
+                              </td>
+                              <td>{((subtotal + Number(estimateInfo[0]?.agency_fees) - Number(estimateInfo[0]?.discount))*estimateInfo[0]?.tax_percent/100).toLocaleString()}</td>
+                            </tr>
+
+
+                            <tr>
+                              <td colSpan="2">
+                                <b>Grand Total</b>
+                              </td>
+                              <td>
+{((subtotal + Number(estimateInfo[0]?.agency_fees) - Number(estimateInfo[0]?.discount)) + ((subtotal + Number(estimateInfo[0]?.agency_fees) - Number(estimateInfo[0]?.discount))*estimateInfo[0]?.tax_percent/100)).toLocaleString()}
+                                </td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                    <div className="text-start">
+                      <input type="submit" className="btn btn-success col-md-3" value="Submit" name="submit" />
+
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </>
+
+  )
+}
+

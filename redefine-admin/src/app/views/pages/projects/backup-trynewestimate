@@ -1,0 +1,197 @@
+<div className="container-fluid">
+
+<h1 className="page-heading">
+    Create Estimator</h1>
+
+<div className="row search-estimate-row">
+    <div className="col-sm-6  col-xs-12  col-md-6">
+        <span className="twitter-typeahead" style="position: relative; display: inline-block;"><input type="text" className="form-control tt-hint" readonly="" autocomplete="off" spellcheck="false" tabindex="-1" dir="ltr" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"><input type="text" name="search_estimate" id="search_estimate" placeholder="To copy data from other estimate, search here..." className="form-control tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Lato, Calibri, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div className="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div className="tt-dataset tt-dataset-itemcodes"></div></div></span>
+    </div>
+</div>
+
+<div className="row" id="estimatorCreatePage">
+    <div className="col-sm-12  col-xs-12  col-md-12">
+
+        <div className="the-box">
+		<table className="table table-striped table-hover table-bordered">
+            <tbody>
+			                <tr>
+                    <td colspan="3" style="text-align: right;">23 Nov 2022</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Estimate No.</b></td>
+                    <td colspan="3">3777_C298_RMPL_Nov_2022_96</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Client</b></td>
+                    <td colspan="3">Abbott Diagnostics Medical Private Limited, ASSAR, A1 Automobile, A1 Automobile, A5E Consulting</td>
+                </tr>
+                <!--<tr>
+                    <td colspan="2"><b>Enquiry through</b></td>
+                    <td colspan="3"></td>
+                </tr>-->
+                <tr>
+                    <td colspan="2"><b>Project Code.</b></td>
+                    <td colspan="3">3777_Del_2022</td>
+                </tr>
+                <!--<tr>
+                    <td colspan="2"><b>Project Manager</b></td>
+                    <td colspan="3">Kapil Pant</td>
+                </tr>-->
+                <tr>
+                    <td colspan="2"><b>Project</b></td>
+                    <td colspan="3">Test Project</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><b>Project Manager</b></td>
+                    <td colspan="3">
+                        <select className="form-control" name="project_manager_id">
+                            <option value="">Select Project Manager</option>
+                                                                                                <option value="33">Kapil Pant</option>
+                                                                                    </select>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+            <form action="http://project.redefine.in/estimator/create/3777" method="post" acceptCharset="utf-8">			<input type="hidden" name="project_id" value="3777">
+			<input type="hidden" name="estimate_number" value="3777_C298_RMPL_Nov_2022_96">
+               <!-- <div className="row">
+                    <div className="col-sm-3  col-xs-12  col-md-3 form-group noborder">
+                        <label>Select City:<span className="req">*</span></label>
+                        <select name="city" id="city" className="form-control" required="required">
+                            <option value="">Select City</option>
+                            <option value=1>Bengaluru</option>                       </select>
+                    </div>
+                </div>-->
+				
+                <h3>ADD Services :</h3>
+                <div className="row" style="padding: 10px;">
+                    <table className="table table-bordered" id="addServices">
+                        <thead>
+                          <tr>
+                            <th>Service</th>
+                            <th>Service Type</th>
+                            <th>Description</th>
+                            <th>Nos.</th>
+                            <th>L</th>
+                            <th>W</th>
+                            <th>H</th>
+                            <th>No of Days</th>
+                            <th>Price</th>
+                            <th>Total Price</th>
+                            <th><b>Add </b></th>
+                            <th><b>Delete</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="estimator-row">
+                            <td>
+                                <select name="service[]" className="form-control service_id watch-for-change" required="required" id="service-1" onchange="getPrice(this.id);">
+									<option value="">Select Service</option>
+																	</select>
+                            </td>
+                            <td><input type="text" name="type[]" readonly="" value="" id="type-1" className="form-control service_type"></td>
+                            <td><input type="text" name="desc[]" value="" id="desc-1" className="form-control service_desc"></td>
+                            <td><input type="text" name="nos[]" value="1" id="nos-1" className="form-control no_of_unit watch-for-change" required="required" onblur="getTotalPrice(this.id)"></td>
+                            <td><input type="number" name="l[]" readonly="" value="" id="l-1" className="form-control length watch-for-change" required="required" onblur="getTotalPrice(this.id)"></td>
+                            <td><input type="number" name="w[]" readonly="" value="" id="w-1" className="form-control width watch-for-change" required="required" onblur="getTotalPrice(this.id)"></td>
+                            <td><input type="number" name="h[]" readonly="" value="" id="h-1" className="form-control height watch-for-change" required="required" onblur="getTotalPrice(this.id)"></td>
+                            <td><input type="text" name="day[]" value="1" id="day-1" className="form-control no_of_day watch-for-change" required="required" onblur="getTotalPrice(this.id)"></td>
+                            <td><input type="text" name="price[]" value="" id="price-1" className="form-control price watch-for-change" required="required"></td>
+                            <td><input type="text" name="total_price[]" value="" id="total-1" className="form-control total_price" readonly="readonly" required="required"></td>
+                            <td>
+                                <button type="button" className="btn btn-primary btn-sm addJS"><i className="fa fa-plus-square fa-2x" aria-hidden="true"></i></button>
+                            </td>
+                            <td>
+                                <button type="button" className="btn btn-danger btn-sm remJS"><i className="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+                            </td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    <div></div>
+                    
+                
+                </div>
+
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-8">
+                        <label className="pull-right">Sub Total: </label>
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <label><b id="estimate_amount_label">0</b></label>
+                        <input type="hidden" name="estimate_amount" id="estimate_amount">
+                    </div>
+                </div>
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-8">
+                        <label className="pull-right">Discount: </label>
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <input type="text" name="discount" id="discount" className="form-control watch-for-change" value="0">
+                    </div>
+                </div>
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-8">
+                        <label className="pull-right">Agency Fees: </label>
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <input type="text" name="agency_fees" id="agency_fees" className="form-control watch-for-change" value="0">
+                    </div>
+                </div>
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-8">
+                        <label className="pull-right">Total: </label>
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <label><b id="total_label">0</b></label>
+                        <input type="hidden" name="total" id="total">
+                    </div>
+                </div>
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-6">
+                        <select className="form-control watch-for-change" name="tax_type">
+                            <option value="">Select GST Type</option>
+                            <option value="cgst_sgst" selected="selected">CGST &amp; SGST</option>
+                            <option value="igst">IGST</option>
+                        </select>
+                        
+                    </div>
+                    <div className="col-sm-2">
+                        <input type="text" name="tax_percent" id="tax_percent" className="form-control watch-for-change" value="" placeholder="Percent Tax">
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <label><b id="tax_amount_label">0</b></label>
+                        <input type="hidden" name="tax_amount" id="tax_amount">
+                    </div>
+                </div>
+
+                <div className="row calc-row">
+                    <div className="col-md-2 col-md-offset-8">
+                        <label className="pull-right">Grand Total: </label>
+                    </div>
+                    <div className="col-md-2 pull-right">
+                        <label><b id="grand_total_label">0</b></label>
+                        <input type="hidden" name="grand_total" id="grand_total">
+                    </div>
+                </div>
+
+               
+				
+            <input type="submit" className="btn btn-success" value="Submit" name="submit">
+            </form>
+			
+        </div>
+    </div>
+</div>
+
+
+
+</div>
