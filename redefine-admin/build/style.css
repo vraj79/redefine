@@ -1,0 +1,371 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.echarts-for-react {
+  height: 500px !important;
+}
+
+.echarts-for-react canvas {
+  top: -74px !important;
+}
+
+.br-4 {
+  border-radius: 9px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.css-qq4yyz .icon {
+  font-size: 38px !important;
+}
+
+.box-scroll {
+  height: 200px;
+  overflow: auto;
+}
+
+.box-scroll option {
+  cursor: pointer;
+}
+
+.box-scroll option:hover {
+  background-color: #c1c1c1;
+  transition: all .3s ease;
+}
+
+.multipleChosen,
+.multipleSelect2 {
+  width: 300px;
+}
+
+/* .css-16ogjn4 a, .css-sukebr button {
+  color: #555;
+}
+
+.css-sukebr button.open, .css-16ogjn4 a.navItemActive, .css-sukebr button:hover, .css-16ogjn4 a:hover {
+  background-color: #f4f7fc;
+  color: navy;
+}
+
+
+
+.css-cbjwpp {
+  background: #f4f7fc;
+} */
+
+/* Modal css */
+
+.v-hidden {
+  visibility: hidden;
+  opacity: 0;
+  height: 0px;
+}
+
+.v-show {
+  height: 100vh;
+  width: 83%;
+  position: fixed;
+  visibility: visible;
+  opacity: 1;
+  top: 64px;
+  z-index: 5555;
+  background: rgba(0, 0, 0, .7);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  /* clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 14% 49%, 0% 0%); */
+  background-color: #46ac3c !important;
+}
+
+.clip {
+  /* clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 14% 49%, 0% 0%); */
+  background-color: #232a45 !important;
+  color: #fff !important;
+}
+
+#ModalHeader {
+  transition: opacity .4s ease;
+
+}
+
+.css-126v553 {
+  display: none !important;
+}
+
+.material-icons {
+  font-size: 20px !important;
+}
+
+#pills-tab {
+  /* width: fit-content; */
+  margin: 0 auto;
+}
+
+.ck-editor__editable {
+  min-height: 275px;
+}
+
+.bg-blue {
+  background-color: #222a44;
+}
+
+
+
+
+
+
+
+
+
+svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.select {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+}
+
+.select:focus {
+  outline: 0;
+}
+
+.select:focus .selection {
+  box-shadow: 0 0 1px 1px #00a9e0;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.selection {
+  position: relative;
+  padding: 5px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.value {
+  position: relative;
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+.multiple {
+  padding-right: 30px;
+  margin-right: 5px;
+  background: #d9f2fb;
+  color: #00a9e0;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  padding: 10px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.placeholder {
+  padding: 5px 10px;
+  color: #898989;
+}
+
+.arrow {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: block;
+  padding: 10px;
+  font-size: 10px;
+  color: #898989;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: solid #ddd;
+  border-width: 0 1px;
+  background: #fff;
+}
+
+.option {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.option.selected {
+  border: 1px solid #00a9e0;
+  margin: -1px -1px 0;
+  background: #d9f2fb;
+}
+
+.option.focused {
+  background: #f5f5f5;
+}
+
+.checkbox {
+  content: '';
+  vertical-align: top;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin: 2px 12px 0 0;
+  color: #fff;
+  font-size: 10px;
+}
+
+.selected .checkbox {
+  border-color: #007da6;
+  background: #00a9e0;
+}
+
+
+
+
+/* Portfolio - imported */
+
+.shadow-effect {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #ECECEC;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10), 0 15px 12px rgba(0, 0, 0, 0.02);
+}
+
+#shadow-effect p {
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 17px 0;
+  font-weight: 300;
+}
+
+.img-circle {
+  border-radius: 50%;
+  vertical-align: middle;
+  max-width: 90px;
+  min-height: 90px;
+  transform-style: preserve-3d;
+  margin: 0 auto 17px;
+}
+
+#customer-testimonoals {
+  margin-top: 6%;
+}
+
+.testimonial-name {
+  margin: -17px auto 0;
+  display: table;
+  width: auto;
+  /* background: linear-gradient(100deg, #845EC2, #BE93FD); */
+  background: linear-gradient(100deg, #FF8066, #FF918D);
+  /* background: linear-gradient(135deg, #ff3e00, #eaa400); */
+  padding: 9px 35px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.12), 0px 5px 7px rgba(0, 0, 0, 0.5);
+}
+
+#customer-testimonoals .item {
+  text-align: center;
+  padding: 50px;
+  margin-bottom: 0px;
+  opacity: 0.2;
+  transform: scale3d(0.8, 0.8, 1);
+  transition: all 0.3s ease-in-out;
+}
+
+#customer-testimonoals .owl-item.active.center .item {
+  opacity: 1;
+  transform: scale3d(1.0, 1.0, 1);
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #56423D;
+  transform: translate3d(0px, -50%, 0px) scale(0.8);
+}
+
+.owl-carousel .owl-dots {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.owl-carousel .owl-dots .owl-dot {
+  display: inline-block;
+}
+
+.owl-carousel .owl-dots .owl-dot span {
+  /* background: #eaa400; */
+  background: #56423D;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  margin: 0 2px 5px;
+  transform: translate3d(0px, -50%, 0px) scale(0.3);
+  transform-origin: 50% 50% 0;
+  transition: all 250ms ease-out 0s;
+}
+
+.filters {
+  background-color: rgba(35, 42, 68, .9);
+}
+
+.filters label {
+  color: #fff;
+}
+
+.filters .searchWrapper , .border-modified{
+  /* background-color: #fff; */
+  border-bottom: 1px solid #fff;
+    border-radius: 0px !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    background-color: transparent !important;
+    color: rgba(255,255,255,.4) !important;
+}
+
+.filters .chip {  
+  background: #fff;
+  color: #000;
+
+}
+.filters .closeIcon {  
+  background: #000;
+  border-radius: 50%;
+}
+.filters .multiSelectContainer li {
+  padding: 4px 10px;
+}
