@@ -1,8 +1,8 @@
 import axios from "axios"
 
 export const axiosInstance = axios.create({
-    // baseURL : "http://localhost:7000/api/"
-    baseURL : "https://api.redefineopmt.in/api/"
+    baseURL : "http://localhost:7000/api/"
+    // baseURL : "https://api.redefineopmt.in/api/"
     // baseURL : "http://51.79.205.255:7000/api/"
 })
 

@@ -5,7 +5,8 @@ const pool = require('../db/conn')
 
 // Get data
 router.get('/view', async (req, res, next) => {
-    let getQuery = `SELECT * FROM techvolopy1_db.groups where flag=1`;
+    // let getQuery = `SELECT * FROM techvolopy1_db.groups where flag=1`;
+    let getQuery = `SELECT * FROM techvolopy1_db.groups`;
     try {
         let results = await pool.query(getQuery, (err, rows, fields) => {
             if (err) {

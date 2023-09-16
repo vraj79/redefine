@@ -172,6 +172,11 @@ export const AllUsers = () => {
     }
   };
 
+  const getGroupName = (id) => {
+    let group = groups.length > 0 && groups.find((ele) => ele.id === id);
+    return group?.name;
+  };
+
   const columns = [
     {
       name: "Name",
@@ -181,6 +186,12 @@ export const AllUsers = () => {
     {
       name: "Email",
       selector: (row) => row.email,
+      sortable: true,
+    },
+    {
+      name: "Designation",
+      selector: (row) =>
+        row.group_id !== null ? getGroupName(row.group_id) : "N/A",
       sortable: true,
     },
     {
