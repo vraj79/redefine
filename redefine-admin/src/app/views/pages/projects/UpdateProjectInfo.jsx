@@ -161,7 +161,7 @@ export const UpdateProjectInfo = () => {
                   Project Start date:<span className="req">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="start_date"
                   className="form-control datepicker"
                   id="start_date"
@@ -177,7 +177,7 @@ export const UpdateProjectInfo = () => {
                 <label>Project End date:</label>
 
                 <input
-                  type="text"
+                  type="date"
                   name="actual_end_date"
                   className="form-control datepicker"
                   id="actual_end_date"
